@@ -1,0 +1,13 @@
+# User-specific stuff
+.idea/
+.vscode/
+
+# Generated files
+.phpunit.result.cache
+.phpunit.cache
+
+### Laravel template
+/vendor/
+
+storage/*.key
+.env

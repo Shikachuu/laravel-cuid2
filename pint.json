@@ -1,0 +1,30 @@
+{
+  "preset": "psr12",
+  "rules": {
+    "array_push": true,
+    "is_null": true,
+    "modernize_strpos": true,
+    "logical_operators": true,
+    "modernize_types_casting": true,
+    "ordered_traits": true,
+    "non_printable_character": true,
+    "array_syntax": {
+      "syntax": "short"
+    },
+    "trailing_comma_in_multiline": true,
+    "single_quote": true,
+    "fully_qualified_strict_types": true,
+    "no_empty_phpdoc": true,
+    "no_empty_comment": true,
+    "ternary_to_null_coalescing": true,
+    "short_scalar_cast": true,
+    "declare_strict_types": true,
+    "use_arrow_functions": true,
+    "void_return": true,
+    "concat_space": {
+      "spacing": "one"
+    },
+    "no_unused_imports": true,
+    "strict_comparison": true
+  }
+}
