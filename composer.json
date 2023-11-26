@@ -58,6 +58,10 @@
     "scripts": {
         "lint": "pint",
         "test": "pest",
+        "ci": [
+            "pint --test",
+            "pest --bail --strict-coverage --stop-on-risky --testdox --coverage"
+        ],
         "post-autoload-dump": [
             "@clear",
             "@prepare"
