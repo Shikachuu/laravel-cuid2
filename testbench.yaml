@@ -1,4 +1,5 @@
-providers: []
+providers:
+  - Shikachuu\LaravelCuid2\Cuid2ServiceProvider
 
 migrations:
   - workbench/database/migrations

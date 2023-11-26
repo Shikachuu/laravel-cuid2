@@ -18,7 +18,8 @@
     "require-dev": {
         "laravel/pint": "^1.13",
         "orchestra/testbench": "^8.13",
-        "pestphp/pest": "^2.23"
+        "pestphp/pest": "^2.23",
+        "pestphp/pest-plugin-laravel": "^2.2"
     },
     "autoload": {
         "psr-4": {
@@ -27,6 +28,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "Tests\\": "tests",
             "Workbench\\App\\": "workbench/app/",
             "Workbench\\Database\\Factories\\": "workbench/database/factories/",
             "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
@@ -51,6 +53,7 @@
     "scripts": {
         "lint": "pint",
         "test": "pest",
+        "testbench": "@php vendor/bin/testbench",
         "post-autoload-dump": [
             "@clear",
             "@prepare"

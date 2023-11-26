@@ -6,7 +6,7 @@ namespace Shikachuu\LaravelCuid2\Facades;
 
 use Visus\Cuid2\Cuid2 as Cuid2Base;
 
-final class Cuid2
+class Cuid2
 {
     private const CUID2_REGEX = '^[0-9a-z]+$';
 
