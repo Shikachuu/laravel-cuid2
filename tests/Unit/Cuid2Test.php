@@ -16,23 +16,33 @@ describe('Cuid2 logic', function (): void {
         expect(\cuid2())->toBe($mockReturn);
     });
 
-    it('throws error on too short key length', fn() => Cuid2::generate(2))
-        ->throws(OutOfRangeException::class);
+    it('throws error on too short/long key length', fn(int $keyLength) => Cuid2::generate($keyLength))
+        ->throws(OutOfRangeException::class)
+        ->with([
+            1,
+            2,
+            3,
+            33,
+            120,
+        ]);
 
-    it('throws error on too long key length', fn() => Cuid2::generate(34))
-        ->throws(OutOfRangeException::class);
+    it('generates with the correct key length', function (?int $keyLength) {
+        expect(Cuid2::generate($keyLength))->toHaveLength($keyLength ?? 24);
+    })->with([
+        null,
+        4,
+        12,
+        30,
+    ]);
 
-    it('generates with the correct keyLength', function () {
-        expect(Cuid2::generate(4))->toHaveLength(4);
-        expect(Cuid2::generate())->toHaveLength(24);
-    });
-
-    it('validates correctly', function () {
-        expect(Cuid2::validate("asd"))->toBeFalse();
-        expect(Cuid2::validate("a!sd"))->toBeFalse();
-        expect(Cuid2::validate("asAd"))->toBeFalse();
-        expect(Cuid2::validate("asdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"))->toBeFalse();
-        expect(Cuid2::validate("asdf12"))->toBeTrue();
-        expect(Cuid2::validate(Cuid2::generate()))->toBeTrue();
-    });
+    it('validates correctly', function (string $actual, bool $expected) {
+        expect(Cuid2::validate($actual))->toBeBool()->toBe($expected);
+    })->with([
+        ['asd', false],
+        ['asd!', false],
+        ['asdA', false],
+        ['asdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', false],
+        ['asd123', true],
+        ['qo08kg4ogogcc4sowwskkwko', true],
+    ]);
 });
