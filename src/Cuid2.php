@@ -10,31 +10,31 @@ use Visus\Cuid2\Cuid2 as Cuid2Base;
 class Cuid2
 {
     private const CUID2_REGEX = '^[0-9a-z]+$';
-    private int $keyLength;
 
-    protected function getKeyLength()
+    protected function validateKeyLength(int $keyLength): bool
     {
-        if (isset($this->keyLength) === false) {
-            $this->keyLength = config('cuid2.max-length');
+        if ($keyLength < 4 || $keyLength > 32) {
+            throw new OutOfRangeException('cuid2.max-length: cannot be less than 4 or greater than 32');
         }
 
-        if ($this->keyLength < 4 || $this->keyLength > 32) {
-            throw new OutOfRangeException("cuid2.max-length: cannot be less than 4 or greater than 32");
-        }
-
-        return $this->keyLength;
+        return true;
     }
 
-    public function generate(): string
+    public function generate(?int $keyLength = null): string
     {
-        return (new Cuid2Base($this->getKeyLength()))->toString();
+        $actualKeyLength = $keyLength ?? config('cuid2.max-length');
+        $this->validateKeyLength($actualKeyLength);
+
+        return (new Cuid2Base($actualKeyLength))->toString();
     }
 
     public function validate(string $value): bool
     {
         $idLength = strlen($value);
 
-        if ($idLength < 4 || $idLength > $this->getKeyLength()) {
+        try {
+            $this->validateKeyLength($idLength);
+        } catch (OutOfRangeException) {
             return false;
         }
 

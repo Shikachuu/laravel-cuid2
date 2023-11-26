@@ -12,7 +12,7 @@ describe('migrations', function (): void {
         expect(Schema::hasColumn('flights', 'cuid'))->toBeTrue();
         expect(Schema::getColumnType('flights', 'cuid'))->toBe('string');
         $this->beforeApplicationDestroyed(
-            fn() => artisan($this, 'migrate:rollback'),
+            fn () => artisan($this, 'migrate:rollback'),
         );
     });
 });

@@ -14,7 +14,7 @@ describe('cuid2 ID trait', function (): void {
 
         $mockCuid->expects('generate')->andReturn($fakeId);
 
-        $model = new class extends Model {
+        $model = new class () extends Model {
             use HasCuid2;
         };
         expect($model->newUniqueId())->toBe($fakeId);
@@ -24,7 +24,7 @@ describe('cuid2 ID trait', function (): void {
     })->throws(ModelNotFoundException::class);
 
     it('validates every trait method is extended correctly', function (): void {
-        $model = new class extends Model {
+        $model = new class () extends Model {
             use HasCuid2;
 
             protected $primaryKey = 'cuid';

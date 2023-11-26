@@ -7,7 +7,7 @@ namespace Shikachuu\LaravelCuid2\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @method string generate() Generates a new Cuid2 with the length defined in the config file (default: 24)
+ * @method string generate(?int $keyLength = null) Generates a new Cuid2 with the length defined in the config file (default: 24)
  * @method bool validate(string $string) Checks if the given string is a valid Cuid2
  */
 
