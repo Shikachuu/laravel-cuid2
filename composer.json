@@ -13,9 +13,11 @@
     "prefer-stable": true,
     "require": {
         "php": "^8.1",
+        "illuminate/support": "^v10",
         "visus/cuid2": "^4.0"
     },
     "require-dev": {
+        "doctrine/dbal": "^3.7",
         "laravel/pint": "^1.13",
         "orchestra/testbench": "^8.13",
         "pestphp/pest": "^2.23",
@@ -40,7 +42,7 @@
                 "Shikachuu\\LaravelCuid2\\Cuid2ServiceProvider"
             ],
             "aliases": {
-                "Cuid2": "Shikachuu\\LaravelCuid2\\Facades"
+                "Cuid2": "Shikachuu\\LaravelCuid2\\Facades\\Cuid2"
             }
         }
     },

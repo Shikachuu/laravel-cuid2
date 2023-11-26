@@ -9,7 +9,7 @@ use Illuminate\Database\Schema\ColumnDefinition;
 use Illuminate\Database\Schema\ForeignIdColumnDefinition;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
-use Shikachuu\LaravelCuid2\Facades\Cuid2;
+use Shikachuu\LaravelCuid2\Facades\Cuid2 as Cuid2Facade;
 
 class Cuid2ServiceProvider extends ServiceProvider
 {
@@ -17,7 +17,7 @@ class Cuid2ServiceProvider extends ServiceProvider
     {
         Validator::extend(
             'cuid2',
-            fn ($attribute, $value, $parameters, $validator) => Cuid2::validate($value),
+            fn ($attribute, $value, $parameters, $validator) => Cuid2Facade::validate($value),
         );
 
         Blueprint::macro(

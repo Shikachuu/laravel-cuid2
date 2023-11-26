@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Shikachuu\LaravelCuid2\Facades;
+namespace Shikachuu\LaravelCuid2\Eloquent\Concerns;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Database\Eloquent\Relations\Relation;
+use Shikachuu\LaravelCuid2\Facades\Cuid2;
 
 trait HasCuid2
 {
@@ -40,21 +39,14 @@ trait HasCuid2
      * Retrieve the model for a bound value.
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
-    public function resolveRouteBindingQuery(Model|Relation $query, mixed $value, ?string $field = null): Relation
+    public function resolveRouteBindingQuery($query, $value, $field = null)
     {
-        if (
-            $field !== null
-            && in_array($field, $this->uniqueIds(), true)
-            && Cuid2::validate((string)$value) === false
-        ) {
+        $isValueValidCuid2 = Cuid2::validate((string)$value);
+        if ($field !== null && in_array($field, $this->uniqueIds(), true) && $isValueValidCuid2 === false) {
             throw (new ModelNotFoundException())->setModel(get_class($this), $value);
         }
 
-        if (
-            $field === null
-            && in_array($this->getRouteKeyName(), $this->uniqueIds(), true)
-            && Cuid2::validate((string)$value)
-        ) {
+        if ($field === null && in_array($this->getRouteKeyName(), $this->uniqueIds(), true) && $isValueValidCuid2) {
             throw (new ModelNotFoundException())->setModel(get_class($this), $value);
         }
 
